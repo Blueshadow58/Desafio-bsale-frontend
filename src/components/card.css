@@ -1,0 +1,10 @@
+.img-container {
+  max-height: 250px;
+  display: flex;
+  align-items: center;
+}
+
+.card-img {
+  max-height: 250px;
+  text-align: center;
+}
