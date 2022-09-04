@@ -31,16 +31,11 @@ document.getElementById("customNav").innerHTML = `
           >
             Categoria
           </a>
-          <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
-            <li>
-              <a class="dropdown-item" >
-                Another action
-              </a>
-            </li>
-          </ul>
+          <select class="dropdown-menu" id='dropdownMenu'  aria-labelledby="navbarScrollingDropdown">
+          </select>
         </li>
       </ul>
-      <form class="d-flex">
+      
         <input
           class="form-control me-2"
           type="search"
@@ -50,7 +45,7 @@ document.getElementById("customNav").innerHTML = `
         <button class="btn btn-outline-success" type="submit">
           Buscar
         </button>
-      </form>
+      
     </div>
   </div>
 </nav>;
