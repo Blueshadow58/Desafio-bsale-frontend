@@ -1,11 +1,14 @@
 const cardList = document.getElementById("cardList");
 const dropDownMenu = document.getElementById("dropdownMenu");
-
+const pageSpan = document.getElementById("pageSpan");
 // def products & categories as an array and the page with the starter value
+//def value for current category
 let products = [];
 let categories = [];
 let page = 1;
+let currentCategory = "";
 
+pageSpan.textContent = `Página ${page}`;
 // adding on press function to the "buscar" button
 const button = document
   .querySelector("button[type=submit]")
@@ -19,12 +22,19 @@ document.querySelector("input").addEventListener("keydown", (e) => {
 });
 
 //adding function next page
-document.getElementById("nextPage").addEventListener("click", () => nextPage());
+const nextBtn = document.getElementById("nextPage");
+nextBtn.addEventListener("click", () => nextPage());
 // substract function previous page
-document
-  .getElementById("previousPage")
-  .addEventListener("click", () => previousPage());
+const previousBtn = document.getElementById("previousPage");
+previousBtn.addEventListener("click", () => previousPage());
+//disable previous page at the start
 document.getElementById("previousPage").disabled = true;
+
+//put current category in the current category button
+const btnCurrentCategory = document.getElementById("btnCurrentCategory");
+// dont dysplay the button at the start
+btnCurrentCategory.style.display = "none";
+btnCurrentCategory.addEventListener("click", () => cleanFilter());
 
 // Get products from api
 const getProducts = async () => {
@@ -144,13 +154,25 @@ const makingCategories = (categories) => {
 // detect value selected in the dropdown categories
 const onChangeDropDown = async () => {
   if (dropDownMenu.value) {
-    // get the dropdown value
-    const inputValue = dropDownMenu.value;
-    const options = {
-      method: "POST",
-      body: new URLSearchParams({ name: inputValue }),
-    };
     try {
+      // get the dropdown value
+      const idCategory = dropDownMenu.value;
+      //get name of the selected category
+      currentCategory = categories.find((cat) => cat.id == idCategory).name;
+      //put drop content-text into btn current category
+      btnCurrentCategory.textContent = `Borrar filtro:  ${currentCategory}`;
+      //visible current category button
+      btnCurrentCategory.style.display = "block";
+      // non display page span
+      pageSpan.style.display = "none";
+      //non display the paginated button
+      nextBtn.style.display = "none";
+      previousBtn.style.display = "none";
+
+      const options = {
+        method: "POST",
+        body: new URLSearchParams({ name: idCategory }),
+      };
       const res = await fetch(
         "https://desafio-bsale-api-heroku.herokuapp.com/api/products",
         options
@@ -158,10 +180,21 @@ const onChangeDropDown = async () => {
       products = await res.json();
       // create the cards
       makingProducts(products);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
     }
   }
+};
+
+//clean current filter by cateogry
+const cleanFilter = () => {
+  getProducts();
+  //reset states of navigation btn and page span
+  currentCategory = "";
+  btnCurrentCategory.style.display = "none";
+  nextBtn.style.display = "inline";
+  previousBtn.style.display = "inline";
+  pageSpan.style.display = "inline";
 };
 
 // on click next page button add +1 to page and get the new products
@@ -173,6 +206,7 @@ const nextPage = () => {
   }
   // enable  previous page button
   document.getElementById("previousPage").disabled = false;
+  pageSpan.textContent = `Página ${page}`;
   getProducts();
 };
 
@@ -186,13 +220,14 @@ const previousPage = () => {
     // enable the nextpage button
     document.getElementById("nextPage").disabled = false;
   }
-
+  pageSpan.textContent = `Página ${page}`;
   // products.next.page;
   getProducts();
 };
 
 dropDownMenu.onchange = onChangeDropDown;
-// get fucntions
-onChangeDropDown();
-getProducts();
+
+// get functions
 getCategories();
+getProducts();
+onChangeDropDown();

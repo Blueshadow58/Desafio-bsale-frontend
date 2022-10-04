@@ -10,25 +10,29 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="./src/components/card.css" />
+
     <title>Desafio Bsale frontEnd</title>
   </head>
   <body>
     <!-- dark navbar at the top -->
     <nav id="customNav"></nav>
 
-    <!-- container with all the cards -->
-    <div class="container">
-      <div class="row row-cols-1 row-cols-md-5 g-4" id="cardList"></div>
-    </div>
-
     <!-- two button pagination -->
     <div class="container">
       <div id="pagination"></div>
     </div>
 
+    <!-- container with all the cards -->
+    <div class="container">
+      <div class="row row-cols-1 row-cols-md-5 g-4" id="cardList"></div>
+    </div>
+
     <!-- import javascript -->
     <script type="text/javascript" src="./src/components/navBar.js"></script>
-    <script type="text/javascript" src="./src/components/footer.js"></script>
+    <script
+      type="text/javascript"
+      src="./src/components/pagination.js"
+    ></script>
     <script type="text/javascript" src="./src/api.js"></script>
 
     <!-- import cds bootstrap -->

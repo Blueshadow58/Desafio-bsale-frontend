@@ -3,7 +3,7 @@
 // and a button as a complemenet to execute the filter
 
 document.getElementById("customNav").innerHTML = `
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5 p-3 rounded-bottom >
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3 p-3 rounded-bottom >
   <div class="container-fluid">
     <a class="navbar-brand" >
       Desafio Bsale FrontEnd
