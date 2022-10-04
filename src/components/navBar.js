@@ -1,17 +1,21 @@
+// navbar with dropdown categories
+// input that filter by name that execute itself by pressing the 'Enter' key
+// and a button as a complemenet to execute the filter
+
 document.getElementById("customNav").innerHTML = `
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5 p-3 rounded-bottom >
   <div class="container-fluid">
     <a class="navbar-brand" >
       Desafio Bsale FrontEnd
     </a>
     <button
-      class="navbar-toggler"
+      class="navbar-toggler "
       type="button"
       data-bs-toggle="collapse"
       data-bs-target="#navbarScroll"
       aria-controls="navbarScroll"
       aria-expanded="false"
-      aria-label="Toggle navigation"
+      aria-label="Toggle navigation"    
     >
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -35,18 +39,20 @@ document.getElementById("customNav").innerHTML = `
           </select>
         </li>
       </ul>
-      
+      <div class="d-flex" role="search">
         <input
-          class="form-control me-2"
+          class="form-control me-3 ms-3"
           type="search"
           placeholder="Buscar"
           aria-label="Search"
+          
         />
-        <button class="btn btn-outline-success" type="submit">
+        
+        <button class="btn btn-outline-light" type="submit">
           Buscar
         </button>
-      
+        </div>
     </div>
   </div>
-</nav>;
+</nav>
 `;
