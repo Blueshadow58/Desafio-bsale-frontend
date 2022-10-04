@@ -65,6 +65,8 @@ const onClickButton = async () => {
     // if input value is empty dont make filters
     getProducts();
   } else {
+    //set onfilter states -> hiden paginated btn and show filter btn
+    onFilter(inputValue);
     // if the input isn't empty make a like query with the input data
     const options = {
       method: "POST",
@@ -159,15 +161,8 @@ const onChangeDropDown = async () => {
       const idCategory = dropDownMenu.value;
       //get name of the selected category
       currentCategory = categories.find((cat) => cat.id == idCategory).name;
-      //put drop content-text into btn current category
-      btnCurrentCategory.textContent = `Borrar filtro:  ${currentCategory}`;
-      //visible current category button
-      btnCurrentCategory.style.display = "block";
-      // non display page span
-      pageSpan.style.display = "none";
-      //non display the paginated button
-      nextBtn.style.display = "none";
-      previousBtn.style.display = "none";
+      //set onfilter states -> hiden paginated btn and show filter btn
+      onFilter(currentCategory);
 
       const options = {
         method: "POST",
@@ -224,6 +219,18 @@ const previousPage = () => {
   // products.next.page;
   getProducts();
 };
+
+async function onFilter(filterData) {
+  //put drop content-text into btn current category
+  btnCurrentCategory.textContent = `Borrar filtro:  ${filterData}`;
+  //visible current category button
+  btnCurrentCategory.style.display = "block";
+  // non display page span
+  pageSpan.style.display = "none";
+  //non display the paginated button
+  nextBtn.style.display = "none";
+  previousBtn.style.display = "none";
+}
 
 dropDownMenu.onchange = onChangeDropDown;
 
