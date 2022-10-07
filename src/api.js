@@ -52,7 +52,7 @@ const getProducts = async () => {
     // create the cards with the porducts data
     makingProducts(data.results);
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 
@@ -61,10 +61,8 @@ const onClickButton = async () => {
   // text from input
   const inputValue = document.querySelector("input").value;
 
-  if (inputValue === "") {
-    // if input value is empty dont make filters
-    getProducts();
-  } else {
+  // if the input has data then make a filter with that
+  if (inputValue !== "") {
     //set onfilter states -> hiden paginated btn and show filter btn
     onFilter(inputValue);
     // if the input isn't empty make a like query with the input data
@@ -80,8 +78,10 @@ const onClickButton = async () => {
       products = await res.json();
       // create cards with the filtered products
       makingProducts(products);
+      // clean input after filter
+      document.querySelector("input").value = null;
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }
 };
@@ -101,7 +101,7 @@ const getCategories = async () => {
     // add the categories to the dropdown in the navbar
     makingCategories(categories);
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
 };
 
@@ -113,7 +113,9 @@ const makingProducts = (products) => {
     <div class="col">
     <div class="card card-height h-100">
     <div class="img-container h-100">
-    <img src="${product.url_image}"  class="card-img" onerror="this.onerror=null;this.src='https://stores.lifestylestores.com/VendorpageTheme/Enterprise/EThemeForLifestyleUpdated/images/product-not-found.jpg';"  alt="no img" >
+    <img src="${
+      product.url_image || ""
+    }"  class="card-img" onerror="this.onerror=null;this.src='https://stores.lifestylestores.com/VendorpageTheme/Enterprise/EThemeForLifestyleUpdated/images/product-not-found.jpg';"  alt="no img" >
     </div>
       <div class="card-body">
       <div>
@@ -167,17 +169,17 @@ const onChangeDropDown = async () => {
 
       const options = {
         method: "POST",
-        body: new URLSearchParams({ name: idCategory }),
+        body: new URLSearchParams({ id: idCategory }),
       };
       const res = await fetch(
-        "https://desafio-bsale-api-heroku.herokuapp.com/api/products",
+        "https://desafio-bsale-api-heroku.herokuapp.com/api/products/category",
         options
       );
       products = await res.json();
       // create the cards
       makingProducts(products);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   }
 };
