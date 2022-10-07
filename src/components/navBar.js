@@ -25,17 +25,8 @@ document.getElementById("customNav").innerHTML = `
         style="--bs-scroll-height: 100px"
       >
         <li class="nav-item dropdown">
-          <a
-            class="nav-link dropdown-toggle"
-            
-            id="navbarScrollingDropdown"
-            role="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-          >
-            Categoria
-          </a>
-          <select class="dropdown-menu" id='dropdownMenu'  aria-labelledby="navbarScrollingDropdown">
+         
+          <select class="form-select text-capitalize" id='dropdownMenu'  >          
           </select>
         </li>
       </ul>

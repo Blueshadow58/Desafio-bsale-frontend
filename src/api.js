@@ -150,7 +150,8 @@ const makingCategories = (categories) => {
       </option>`;
     })
     .join(" ");
-  dropDownMenu.innerHTML = html;
+  const optionDefault = `<option class="dropdown-item text-capitalize" selected disabled>Categoria</option> `;
+  dropDownMenu.innerHTML = optionDefault + html;
 };
 
 // detect value selected in the dropdown categories
