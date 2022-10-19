@@ -1,5 +1,5 @@
 
-# API - Desafio frontend bsale
+# Desafio frontend bsale
 
 Front app en netlify: https://desafio-bsale-frontend.netlify.app/
 
